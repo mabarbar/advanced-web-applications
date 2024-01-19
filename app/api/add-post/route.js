@@ -8,7 +8,7 @@ export async function POST(request) {
   if (title.length < 5 && title.length > 100) {
     return NextResponse.json({ message: "Conditions are not met" }).status(404);
   }
-  
+
   const result = await prisma.post.create({
     data: {
       title,

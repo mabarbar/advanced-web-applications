@@ -3,7 +3,7 @@ import React from "react";
 
 const NavBar = () => {
   return (
-    <div className="flex sticky top-0 items-center justify-around w-full h-16 dark:bg-slate-950 border-b border-slate-800">
+    <div className="z-10 flex sticky top-0 items-center justify-around w-full h-16 dark:bg-slate-950 border-b border-slate-800">
       <Link href="/">
         <div className="relative w-8 h-8">
           <span className="absolute h-8 w-8 bg-transparent bg-gradient-to-bl from-transparent from-40% via-cyan-500 to-transparent to-60%"></span>

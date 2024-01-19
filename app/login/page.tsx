@@ -13,12 +13,12 @@ type PageProps = {
 };
 
 export default function LoginPage({ searchParams }: PageProps) {
-  // const authSession = await getServerAuthSession();
-
   const [inputs, setInputs] = useState<LoginInput>({
     username: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
@@ -28,81 +28,84 @@ export default function LoginPage({ searchParams }: PageProps) {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    await signIn("credentials", {
-      username: inputs.username,
-      password: inputs.password,
-      callbackUrl: "/",
-    });
+    if (inputs.username.length <= 3 || inputs.username.length > 10) {
+      setError("Niepoprawny login i hasło");
+    } else {
+      setError("");
+      await signIn("credentials", {
+        username: inputs.username,
+        password: inputs.password,
+        callbackUrl: "/",
+      });
+    }
   };
   return (
-    <>
-      {/* {authSession?.user ? (
-        true
-      ) : ( */}
-      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
+    <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Username
+            </label>
+            <div className="mt-2">
+              <input
+                id="username"
+                name="username"
+                type="text"
+                autoComplete="off"
+                required
+                value={inputs.username || ""}
+                onChange={handleChange}
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between">
               <label
-                htmlFor="username"
+                htmlFor="password"
                 className="block text-sm font-medium leading-6 text-white"
               >
-                Username
+                Password
               </label>
-              <div className="mt-2">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  autoComplete="off"
-                  required
-                  value={inputs.username || ""}
-                  onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
             </div>
+            <div className="mt-2">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="off"
+                required
+                value={inputs.password || ""}
+                onChange={handleChange}
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="off"
-                  required
-                  value={inputs.password || ""}
-                  onChange={handleChange}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Sign in
+            </button>
+            {error ? (
+              <p className="text-red-600 text-center capitalize">{`Error: ${error}`}</p>
+            ) : null}
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
             {searchParams.error && (
               <p className="text-red-600 text-center capitalize">
                 Login failed.
               </p>
             )}
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-      {/* )} */}
-    </>
+    </div>
   );
 }
