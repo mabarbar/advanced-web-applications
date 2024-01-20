@@ -6,7 +6,7 @@ export default function DeletePostButton({ postId }) {
 
   async function handleClick() {
     try {
-      await fetch(`/api/post/${postId}`, {
+      await fetch(`/api/delete-post/${postId}`, {
         method: "DELETE",
       });
       router.refresh();
@@ -15,5 +15,12 @@ export default function DeletePostButton({ postId }) {
     }
   }
 
-  return <button className="mt-4 w-32 h-8 bg-red-400 rounded-md" onClick={handleClick}>Delete Post</button>;
+  return (
+    <button
+      className="mt-4 w-32 h-8 bg-red-400 rounded-md"
+      onClick={handleClick}
+    >
+      Delete Post
+    </button>
+  );
 }

@@ -36,6 +36,7 @@ export default async function Home() {
               title={post.title}
               content={post.content}
               authorName={post.author.name}
+              authSession={authSession}
             />
           );
         })}

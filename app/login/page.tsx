@@ -1,5 +1,6 @@
 "use client";
-// import { getServerAuthSession } from "@/server/auth";
+import { sha512 } from "js-sha512";
+import { getServerAuthSession } from "@/server/auth";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 
@@ -39,6 +40,7 @@ export default function LoginPage({ searchParams }: PageProps) {
       });
     }
   };
+
   return (
     <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
