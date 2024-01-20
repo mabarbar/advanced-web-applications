@@ -3,15 +3,16 @@ export const userService = {
 };
 
 function authenticate(username: string, password: string) {
-  if (username !== "user" && password !== "123") {
-    return null;
-  }
-
   const user = {
     id: "1",
-    name: "User",
+    name: "user",
+    password: "123",
     email: "user@example.com",
   };
+
+  if (username !== user.name && password !== user.password) {
+    return null;
+  }
 
   return user;
 }
