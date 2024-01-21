@@ -17,7 +17,7 @@ export default function DeletePostButton({ postId }) {
 
   return (
     <button
-      className="mt-4 w-32 h-8 bg-red-400 rounded-md"
+      className="mt-4 w-32 h-8 bg-red-400 rounded-md text-white"
       onClick={handleClick}
     >
       Delete Post

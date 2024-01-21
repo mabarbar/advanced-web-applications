@@ -17,7 +17,6 @@ async function getPosts() {
 }
 
 export default async function Home() {
-  const data = new Date();
   const posts = await getPosts();
 
   const authSession = await getServerAuthSession();
@@ -26,21 +25,19 @@ export default async function Home() {
     <>
       {/* {JSON.stringify(authSession?.user)} */}
 
-      <main>
-        {authSession?.user && <AddPost />}
-        {posts.map((post) => {
-          return (
-            <Post
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              content={post.content}
-              authorName={post.author.name}
-              authSession={authSession}
-            />
-          );
-        })}
-      </main>
+      {authSession?.user && <AddPost />}
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            content={post.content}
+            authorName={post.author.name}
+            authSession={authSession}
+          />
+        );
+      })}
     </>
   );
 }

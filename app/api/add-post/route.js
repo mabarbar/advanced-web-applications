@@ -5,7 +5,12 @@ export async function POST(request) {
   const res = await request.json();
   const { title, content } = res;
 
-  if (title.length < 5 || title.length > 100) {
+  if (
+    title.length < 5 ||
+    title.length > 100 ||
+    content.length < 5 ||
+    content.length > 100
+  ) {
     return NextResponse.json({ message: "Conditions are not met" }).status(404);
   }
 

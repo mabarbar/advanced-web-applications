@@ -15,7 +15,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NavBar />
-        <main className="p-4">{children}</main>
+        <main className="p-4 ">{children}</main>
+        <footer className="flex justify-around items-center bg-gray-200 dark:bg-slate-900 h-12">
+          <span>Contact Us: User@gmail.com</span>
+          <span>Author: Mateusz Barzenc</span>
+          <span>Year of creation: 2024</span>
+        </footer>
       </body>
     </html>
   );

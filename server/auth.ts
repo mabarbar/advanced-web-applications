@@ -34,6 +34,9 @@ export const authOptions: NextAuthOptions = {
           username: string;
           password: string;
         };
+        if (username.length <= 3 || password.length > 10) {
+          return null;
+        }
         const hashedPassword = sha512(password);
         return userService.authenticate(username, hashedPassword);
       },

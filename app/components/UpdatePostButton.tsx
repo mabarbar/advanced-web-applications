@@ -34,7 +34,7 @@ export default function UpdatePostButton({ postId }) {
   return (
     <div className="flex justify-center items-end gap-1">
       <button
-        className="mt-4 w-32 h-8 bg-green-500 rounded-md"
+        className="mt-4 w-32 h-8 bg-green-500 rounded-md text-white"
         onClick={handleEdit}
       >
         Edit
